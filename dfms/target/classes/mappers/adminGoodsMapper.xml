@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin.goods">
+
+	<select id="selectListGoods" resultType="GoodsDto" >
+		SELECT 
+	   			*
+	    FROM 
+				GOODS 	            		       
+	</select>
+	
+	<insert id="insertGoods" parameterType="GoodsDto">
+		    INSERT INTO 
+		  			GOODS (
+						GOODS_NM,
+						SORT,
+						PRICE,
+						DISCOUNT_RATE,
+						TOTAL_AMOUNT,
+						KCAL,
+						PROTEIN_CONTENT,
+						PRODUCER,
+						PRODUCTION_DT,
+						EXPIRATION_DT,
+						STOCK,
+						NUTRITIONAL_INFO,
+						MATERIAL_CONTENT,
+						PRECAUTION,
+						POINT,
+						DELIVERY_PRICE,
+						PART,
+						GOODS_FILE_NAME,
+						ENROLL_DT				  			
+		  			)
+		    VALUES (
+			        #{goodsNm},
+				    #{sort},
+				    #{price},
+					#{discountRate},
+					#{totalAmount},
+					#{kcal},
+					#{proteinContent},
+					#{producer},
+					#{productionDt},
+					#{expirationDt},
+					#{stock},
+					#{nutritionalInfo},
+					#{materialContent},
+					#{precaution},
+					#{point},
+					#{deliveryPrice},
+					#{part},
+					#{goodsFileName},
+					NOW()
+ 			 )
+	</insert> 
+	
+	<update id="updateGoods" parameterType="GoodsDto" >
+	   UPDATE 
+	   			GOODS
+	   <set> 
+	      <if test='goodsNm != null and goodsNm != ""'>
+	        GOODS_NM = #{goodsNm},
+	      </if>
+	      <if test='sort != null and sort != ""'>
+	        SORT = #{sort},
+	      </if>
+	      <if test='price != null and price != ""'>
+	        PRICE = #{price},
+	      </if>
+	      <if test='discountRate != null and discountRate != ""'>
+	        DISCOUNT_RATE = #{discountRate},
+	      </if>
+	      <if test='totalAmount != null and totalAmount != ""'>
+	        TOTAL_AMOUNT = #{totalAmount},
+	      </if>
+	      <if test='kcal != null and kcal != ""'>
+	        KCAL = #{kcal},
+	      </if>
+	      <if test='proteinContent != null and proteinContent != ""'>
+	        PROTEIN_CONTENT = #{proteinContent},
+	      </if>
+	      <if test='producer != null and producer != ""'>
+	        PRODUCER = #{producer},
+	      </if>
+	      <if test='productionDt != null'>
+	        PRODUCTION_DT = #{productionDt},
+	      </if>
+	      <if test='expirationDt != null'>
+	        EXPIRATION_DT = #{expirationDt},
+	      </if>
+	      <if test='stock != null and stock != ""'>
+	        STOCK = #{stock},
+	      </if>
+	      <if test='nutritionalInfo != null and nutritionalInfo != ""'>
+	        NUTRITIONAL_INFO = #{nutritionalInfo},
+	      </if>
+	      <if test='materialContent != null and materialContent != ""'>
+	        MATERIAL_CONTENT = #{materialContent},
+	      </if>
+	      <if test='precaution != null and precaution != ""'>
+	        PRECAUTION = #{precaution},
+	      </if>
+	      <if test='point != null and point != ""'>
+	        POINT = #{point},
+	      </if>
+	      <if test='deliveryPrice != null and deliveryPrice != ""'>
+	        DELIVERY_PRICE = #{deliveryPrice},
+	      </if>
+	      <if test='part != null and part != ""'>
+	        PART = #{part},
+	      </if>
+	      <if test='goodsFileName != null and goodsFileName != ""'>
+	        GOODS_FILE_NAME = #{goodsFileName},
+	      </if>
+	    </set>
+		WHERE 
+				GOODS_CD = #{goodsCd}
+	</update>
+	
+	<delete id="deleteGoods" parameterType="int">
+		DELETE FROM GOODS WHERE GOODS_CD = #{goodsCd}
+	</delete>		
+	
+</mapper>

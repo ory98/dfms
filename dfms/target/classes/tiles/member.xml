@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+      
+	  <definition name="/member/login" extends="baseLayout">
+         <put-attribute name="title" value="로그인" />
+         <put-attribute name="body" value="/WEB-INF/views/client/member/login.jsp" />
+      </definition>  
+      
+      <definition name="/member/register" extends="baseLayout">
+         <put-attribute name="title" value="회원 가입" />
+         <put-attribute name="body" value="/WEB-INF/views/client/member/register.jsp" />
+      </definition>
+      
+      <definition name="/member/findId" extends="baseLayout">
+         <put-attribute name="title" value="아이디 찾기" />
+         <put-attribute name="body" value="/WEB-INF/views/client/member/findId.jsp" />
+      </definition>
+      
+       <definition name="/member/findPw" extends="baseLayout">
+         <put-attribute name="title" value="비밀번호 찾기" />
+         <put-attribute name="body" value="/WEB-INF/views/client/member/findPw.jsp" />
+      </definition>
+      
+      <definition name="/member/updatePw" extends="baseLayout">
+         <put-attribute name="title" value="비밀번호 재설정" />
+         <put-attribute name="body" value="/WEB-INF/views/client/member/updatePw.jsp" />
+      </definition>
+      
+  
+</tiles-definitions>

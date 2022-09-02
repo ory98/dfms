@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+  
+ 
+ <tiles-definitions>
+ 
+ 	<definition name="/admin/notice/adminNoticeList" extends="baseLayout">
+ 		<put-attribute name="title" value="관리자 공지사항" />
+      	<put-attribute name="body" value="/WEB-INF/views/admin/notice/adminNoticeList.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="/admin/notice/adminNoticeAdd" extends="baseLayout">
+       <put-attribute name="title" value="새 공지 추가" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/notice/adminNoticeAdd.jsp" />
+    </definition>
+    
+    <definition name="/admin/notice/adminNoticeModify" extends="baseLayout">
+       <put-attribute name="title" value="공지 수정" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/notice/adminNoticeModify.jsp" />
+    </definition>
+    
+    <definition name="/admin/notice/noticeDetail" extends="baseLayout">
+       <put-attribute name="title" value="공지 사항 상세" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/notice/noticeDetail.jsp" />
+    </definition>
+ 
+ </tiles-definitions>

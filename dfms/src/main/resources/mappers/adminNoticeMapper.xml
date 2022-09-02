@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin.notice">
+
+
+	<select id="selectListNotice" resultType="NoticeDto" >
+		SELECT 
+	   			*
+	    FROM 
+				ADMIN_NOTICE 	            		       
+	</select>
+	
+	<select id="selectOneNotice" parameterType="int" resultType="NoticeDto">
+	    SELECT 
+	    		*
+	    FROM 
+	    		ADMIN_NOTICE  
+        WHERE 
+        		NOTICE_CD = #{noticeCd}
+	</select>
+	
+	<insert id="insertNotice" parameterType="NoticeDto">
+		    INSERT INTO 
+		  			ADMIN_NOTICE (
+						SUBJECT,
+						CONTENT,
+						ENROLL_DT			  			
+		  			)
+		    VALUES (
+			        #{subject},
+				    #{content},
+				    NOW()
+ 			 )
+	</insert> 
+	
+	<update id="updateNotice" parameterType="NoticeDto">
+		UPDATE
+				ADMIN_NOTICE
+		<set> 
+	      <if test='subject != null and subject != ""'>
+	        SUBJECT = #{subject},
+	      </if>
+	      <if test='content != null and content != ""'>
+	        CONTENT = #{content},
+	      </if>
+		</set>
+		WHERE 
+				NOTICE_CD = #{noticeCd}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM ADMIN_NOTICE WHERE NOTICE_CD = #{noticeCd}
+	</delete>	
+
+</mapper>

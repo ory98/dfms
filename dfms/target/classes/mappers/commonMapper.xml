@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="common">
+
+	<select id="selectOneNewGoodsCnt" resultType="int">
+		SELECT
+				COUNT(*)
+		FROM
+				GOODS
+		WHERE
+				SORT = 'new'
+	</select>
+	
+	<select id="selectOneBestGoodsCnt" resultType="int">
+		SELECT
+				COUNT(*)
+		FROM
+				GOODS
+		WHERE
+				SORT = 'best'
+	</select>
+	
+	<select id="selectOneSaleGoodsCnt" resultType="int">
+		SELECT
+				COUNT(*)
+		FROM
+				GOODS
+		WHERE
+				SORT = 'sale'
+	</select>
+	
+	<select id="selectOnePickGoodsCnt" resultType="int">
+		SELECT
+				COUNT(*)
+		FROM
+				GOODS
+		WHERE
+				SORT = 'pick'
+	</select>
+	
+	<resultMap type="hashmap" id="mainGoodsMap">
+		<result column="GOODS_CD" 		 property="goodsCd"/>
+		<result column="GOODS_NM" 		 property="goodsNm"/>
+		<result column="PRICE"    		 property="price"/>
+		<result column="PART"    		 property="part"/>
+		<result column="DISCOUNT_RATE"   property="discountRate"/>
+		<result column="GOODS_FILE_NAME" property="goodsFileName"/>
+	</resultMap>
+	
+	<select id="selectListGoodsNew" resultMap="mainGoodsMap">
+	    SELECT 
+	    		GOODS_CD,
+	    		GOODS_NM,
+	    		PRICE,
+	    		PART,
+	    		DISCOUNT_RATE,
+	    		GOODS_FILE_NAME
+	    FROM 
+	    		GOODS
+	    WHERE
+	    		SORT = 'new'
+	    ORDER BY
+	    		PRODUCTION_DT DESC
+	</select>
+	
+	<select id="selectListGoodsBest" resultMap="mainGoodsMap">
+	    SELECT 
+	    		GOODS_CD,
+	    		GOODS_NM,
+	    		PRICE,
+	    		PART,
+	    		DISCOUNT_RATE,
+	    		GOODS_FILE_NAME
+	    FROM 
+	    		GOODS
+	    WHERE
+	    		SORT = 'best'
+	    ORDER BY
+	    		PRODUCTION_DT DESC
+	</select>
+	
+	<select id="selectListGoodsSale" resultMap="mainGoodsMap">
+	    SELECT 
+	    		GOODS_CD,
+	    		GOODS_NM,
+	    		PRICE,
+	    		PART,
+	    		DISCOUNT_RATE,
+	    		GOODS_FILE_NAME
+	    FROM 
+	    		GOODS
+	    WHERE
+	    		SORT = 'sale'
+	    ORDER BY
+	    		PRODUCTION_DT DESC
+	</select>
+	
+	<select id="selectListGoodsPick" resultMap="mainGoodsMap">
+	    SELECT 
+	    		GOODS_CD,
+	    		GOODS_NM,
+	    		PRICE,
+	    		PART,
+	    		DISCOUNT_RATE,
+	    		GOODS_FILE_NAME
+	    FROM 
+	    		GOODS
+	    WHERE
+	    		SORT = 'pick'
+	    ORDER BY
+	    		PRODUCTION_DT DESC
+	</select>
+	
+	<select id="selectListNotice" resultType="NoticeDto" >
+		SELECT 
+	   			*
+	    FROM 
+				ADMIN_NOTICE 	            		       
+	</select>
+	
+	<insert id="insertContact" parameterType="ContactDto">
+		INSERT INTO CONTACT(
+				NAME,
+				EMAIL,
+				SUBJECT,
+				CONTENT,
+				REG_DT
+		)
+		VALUES (
+				#{name},
+				#{email},
+				#{subject},
+				#{content},
+				NOW()
+		)
+	</insert>
+	
+	<select id="selectListContact" resultType="ContactDto">
+		SELECT
+				*
+		FROM
+				CONTACT
+		ORDER BY
+				REG_DT DESC
+	</select>
+	
+	<select id="selectOneContact" parameterType="int" resultType="ContactDto">
+		SELECT
+				*
+		FROM
+				CONTACT
+		WHERE
+				CONTACT_CD = #{contactCd}
+	</select>
+	
+	<delete id="deleteContact" >
+		DELETE FROM
+				CONTACT
+		WHERE
+				CONTACT_CD = #{contactCd} 
+	</delete>
+
+</mapper>

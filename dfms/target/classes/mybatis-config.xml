@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.spring.dfms.member.dto.MemberDto"   		alias="MemberDto" />
+		<typeAlias type="com.spring.dfms.goods.dto.GoodsDto"     		alias="GoodsDto" />
+	 	<typeAlias type="com.spring.dfms.admin.member.dto.AdminDto"   	alias="AdminDto" />
+		<typeAlias type="com.spring.dfms.admin.notice.dto.NoticeDto"   	alias="NoticeDto" /> 	
+		<typeAlias type="com.spring.dfms.myPage.dto.CartDto"       		alias="CartDto" />
+		<typeAlias type="com.spring.dfms.myPage.dto.HeartDto"       	alias="HeartDto" />
+		<typeAlias type="com.spring.dfms.order.dto.OrderDto"    		alias="OrderDto" /> 
+		<typeAlias type="com.spring.dfms.common.dto.ContactDto"    		alias="ContactDto" /> 
+	</typeAliases>
+	
+</configuration>

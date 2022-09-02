@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="goods">
+
+	<select id="selectListGoods" parameterType="hashmap" resultType="GoodsDto" >
+		SELECT 
+	   			*
+	    FROM 
+				GOODS
+		<where>
+			<if test='!sort.equals("all") and !part.equals("all")'>
+				SORT = #{sort} AND PART = #{part}
+			</if>
+			<if test='!sort.equals("all") and part.equals("all")'>
+				SORT = #{sort} AND PART IN ('shake' , 'protein' , 'pill' , 'tea' , 'vitamin' , 'chicken' , 'meal' , 'salad' ,'vegetable' , 'snack' , 'juice' )
+			</if>
+			<if test='sort.equals("all") and !part.equals("all")'>
+				SORT IN ('new' , 'best' , 'sale' , 'pick') AND PART = #{part}
+			</if>
+			<if test='sort.equals("all") and part.equals("all")'>
+				SORT IN ('new' , 'best' , 'sale' , 'pick') AND PART IN ('shake' , 'protein' , 'pill' , 'tea' , 'vitamin' , 'chicken' , 'meal' , 'salad' ,'vegetable' , 'snack' , 'juice' )
+			</if>
+		</where> 	            		       
+	</select>
+
+	<select id="selectListRelatedGoods" parameterType="hashmap" resultType="GoodsDto" >
+		SELECT 
+	   			*
+	    FROM 
+				GOODS
+		WHERE
+				PART = #{part} AND GOODS_CD != #{goodsCd}
+		ORDER BY
+				PRODUCTION_DT DESC
+	</select>
+
+	<select id="selectListSearchGoods" parameterType="hashmap" resultType="GoodsDto" >
+
+		<if test='method == "keyword"'>
+			SELECT 
+		   			*
+		    FROM 
+					GOODS
+			ORDER BY
+				<if test='keyword == "productionDt"'>
+					PRODUCTION_DT DESC
+				</if>
+				<if test='keyword == "highPrice"'>
+					PRICE - (PRICE*DISCOUNT_RATE) / 100 DESC
+				</if>
+				<if test='keyword == "lowPrice"'>
+					PRICE - (PRICE*DISCOUNT_RATE) / 100 ASC
+				</if>
+				<if test='keyword == "discountRate"'>
+					DISCOUNT_RATE DESC
+				</if>
+		</if>
+		<if test='method == "search"'>
+			SELECT 
+		   			*
+		    FROM 
+					GOODS
+			WHERE
+					GOODS_NM 		  LIKE CONCAT('%' , #{word} , '%') OR
+					PRODUCER  		  LIKE CONCAT('%' , #{word} , '%') 
+		</if>
+		
+	</select>
+	
+	<select id="selectOneGoods" parameterType="int" resultType="GoodsDto">
+	    SELECT 
+	    		*
+	    FROM 
+	    		GOODS  
+        WHERE 
+        		GOODS_CD = #{goodsCd}
+	</select>
+	
+</mapper>
